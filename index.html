@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    This is played in console. not in the browser! Press <kbd>F12</kbd> to access console.
+    <script>
+        let humanScore = 0;
+        let cpuScore = 0;
+        let decider = -1;
+
+        function computerChoice(){
+
+            let rng = Math.floor(Math.random()*3);
+            return rng;
+        }
+        
+        function humanChoice(){
+            let choice = prompt("1: Rock, 2: Paper, 3: Scissors");
+            return parseInt(choice) - 1;
+        }
+
+        function playRound(player, cpu){
+            if(player === cpu){
+                console.log("ITS A TIE!");
+                decider = -1;
+            } else if( player === 0 && cpu === 1){
+                console.log("Player chose Rock, CPU chose Paper. CPU WINS!");
+                decider = 0;
+            } else if( player === 0 && cpu === 2){
+                console.log("Player chose Rock, CPU chose Scissors. Human WINS!");
+                decider = 1;
+            } else if( player === 1 && cpu === 0){
+                console.log("Player chose Paper, CPU chose Rock. Human WINS!");
+                decider = 1;
+            } else if( player === 1 && cpu === 2){
+                console.log("Player chose Paper, CPU chose Scissors. CPU WINS!");
+                decider = 0;
+            } else if( player === 2 && cpu === 0){
+                console.log("Player chose Scissors, CPU chose Rock. CPU WINS!");
+                decider = 0;
+            } else if( player === 2 && cpu === 1){
+                console.log("Player chose Scissors, CPU chose Paper. Human WINS!");
+                decider = 1;
+            }
+            console.log(decider);
+            if(decider === 0){
+                cpuScore++;
+            }else if(decider === 1){
+                humanScore++;
+            }
+            console.log(`
+            Score:
+            Human: ${humanScore}; 
+            CPU: ${cpuScore}
+            `)
+        }
+        
+        function playGame(){
+            let rounds = 5;
+            let played = 0;
+            while(played<rounds){
+                played++;
+                playRound(humanChoice(),computerChoice());
+            }
+        }
+        playGame();
+    </script>
+
+</body>
+</html>
